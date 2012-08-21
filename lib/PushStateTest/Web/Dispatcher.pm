@@ -17,7 +17,8 @@ any '/' => sub { my $c = shift; #{{{
     if ($c->req->header('X-PJAX')) {
         $c->render('list.tt', +{%$data, pjax => 1});
     } else {
-        $c->render('index.tt', $data);
+        my $index = $logic->index($p);
+        $c->render('index.tt', +{%$data, %$index});
     }
 }; #}}}
 
