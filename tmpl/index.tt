@@ -8,7 +8,7 @@
 </ul>
 
 <a rel="pjax" href="[% uri_for('/') %]">トップ</a>
-[% FOREACH region IN ['東アジア', '北アメリカ', '東南アジア', '南アメリカ', '南アジア', 'アフリカ', 'ヨーロッパ', '西アジア'] %]
+[% FOREACH region IN regions %]
 <a rel="pjax" href="[% uri_for('/', {'region' => region}) %]">[% region %]</a>
 [% END %][%# FOREACH %]
 

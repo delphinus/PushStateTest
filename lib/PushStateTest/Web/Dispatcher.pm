@@ -20,7 +20,8 @@ any '/' => sub { my $c = shift; #{{{
         my @css_files = qw!
             http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/themes/cupertino/jquery-ui.css
         !;
-        $c->render('index.tt', $data);
+        my $index = $logic->index($p);
+        $c->render('index.tt', +{%$data, %$index});
     }
 }; #}}}
 
