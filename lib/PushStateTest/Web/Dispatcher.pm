@@ -17,6 +17,9 @@ any '/' => sub { my $c = shift; #{{{
     if ($c->req->header('X-PJAX')) {
         $c->render('list.tt', +{%$data, pjax => 1});
     } else {
+        my @css_files = qw!
+            http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/themes/cupertino/jquery-ui.css
+        !;
         $c->render('index.tt', $data);
     }
 }; #}}}

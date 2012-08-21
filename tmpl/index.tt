@@ -27,6 +27,5 @@
 
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/jquery-ui.min.js"></script>
 <script src="[% uri_for('/static/js/jquery-pjax/jquery.pjax.js') %]"></script>
-<script src="[% uri_for('/static/js/pushstatetest.js') %]"></script>
 
 [% END %]
