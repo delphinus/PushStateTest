@@ -9,10 +9,4 @@ any '/' => sub {
     $c->render('index.tt');
 };
 
-post '/account/logout' => sub {
-    my ($c) = @_;
-    $c->session->expire();
-    $c->redirect('/');
-};
-
 1;

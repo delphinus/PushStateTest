@@ -8,8 +8,14 @@ use 5.008001;
 
 __PACKAGE__->load_plugin(qw/DBI/);
 
-# initialize database
 use DBI;
+use SQL::Abstract;
+
+=item * setup_schema()
+
+テーブル設定
+
+=cut
 sub setup_schema {
     my $self = shift;
     my $dbh = $self->dbh();
@@ -22,5 +28,14 @@ sub setup_schema {
         $dbh->do($stmt) or die $dbh->errstr();
     }
 }
+
+=item * sqla()
+
+SQL::Abstract のインスタンス
+
+=cut
+sub sqla { my $self = shift; #{{{
+    return SQL::Abstract->new;
+} #}}}
 
 1;
