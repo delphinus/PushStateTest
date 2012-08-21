@@ -4,9 +4,21 @@ use warnings;
 use utf8;
 use Amon2::Web::Dispatcher::Lite;
 
-any '/' => sub {
-    my ($c) = @_;
-    $c->render('index.tt');
-};
+use PushStateTest::Logic::Search;
+
+use Log::Minimal;
+
+any '/' => sub { my $c = shift; #{{{
+    my $p = $c->req->parameters;
+    my $logic = PushStateTest::Logic::Search->new;
+    my $data = $logic->search($p);
+    local $Log::Minimal::AUTODUMP = 1;
+
+    if ($c->req->header('X-PJAX')) {
+        $c->render('list.tt', +{%$data, pjax => 1});
+    } else {
+        $c->render('index.tt', $data);
+    }
+}; #}}}
 
 1;

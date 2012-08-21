@@ -1,0 +1,26 @@
+[% IF pjax %]
+<title>[% title || 'PushStateTest' %]</title>
+[% END %][%# IF %]
+<table>
+  <caption>世界の首都圏人口</caption>
+  <thead>
+    <tr>
+      [% FOREACH th IN ths %]
+      <th>[% th %]</th>
+      [% END %][%# FOREACH %]
+    </tr>
+  </thead>
+  <tbody>
+    [% FOREACH tr IN list %]
+    <tr>
+      [% FOREACH th IN ths %]
+        [% IF th == 'id' %]
+      <th>[% tr.id %]</th>
+        [% ELSE %]
+      <td>[% tr.$th %]</td>
+        [% END %][%# IF %]
+      [% END %][%# FOREACH %]
+    </tr>
+    [% END %][%# FOREACH %]
+  </tbody>
+</table>

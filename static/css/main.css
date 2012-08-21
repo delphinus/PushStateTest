@@ -12,6 +12,13 @@ footer {
         font-weight: bold;
     }
 
+.dialog {
+    display: none;
+}
+.shadow {
+    box-shadow: 0 0 0 7px rgba(0,0,0,0.1);
+}
+
 /* smart phones */
 @media screen and (max-device-width: 480px) {
 }

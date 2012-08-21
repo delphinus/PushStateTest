@@ -1,14 +1,32 @@
 [% WRAPPER 'include/layout.tt' %]
 
-<h1>検索フォームのテスト</h1>
+<h1>pjax のテスト</h1>
 <ul>
 <li>検索すると Ajax で検索結果が書き換わります。
-<li>pushstate 非対応ブラウザでは
+<li>ページのタイトルやアドレスバー内の URL も書き換わります。
+<li>戻る・進むボタンで行き来が出来ますが、pjax OFF のボタンを押すと、遷移が出来なくなります。
 </ul>
 
-<form action="/search" method="get">
-<label for="word">検索語句</label>
-<input type="te
+<a rel="pjax" href="[% uri_for('/') %]">トップ</a>
+[% FOREACH region IN ['東アジア', '北アメリカ', '東南アジア', '南アメリカ', '南アジア', 'アフリカ', 'ヨーロッパ', '西アジア'] %]
+<a rel="pjax" href="[% uri_for('/', {'region' => region}) %]">[% region %]</a>
+[% END %][%# FOREACH %]
+
+<form action="/" method="get">
 </form>
+
+<button id="pjaxOn">pjax ON</button>
+<button id="pjaxOff">pjax OFF</button>
+
+<div id="list">
+[% INCLUDE 'list.tt' %]
+</div>
+
+<div class="dialog" id="dg-on" title="pjax ON">戻る・進むボタンで遷移するようになります。</div>
+<div class="dialog" id="dg-off" title="pjax OFF">戻る・進むボタンで遷移しなくなります。</div>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/jquery-ui.min.js"></script>
+<script src="[% uri_for('/static/js/jquery-pjax/jquery.pjax.js') %]"></script>
+<script src="[% uri_for('/static/js/pushstatetest.js') %]"></script>
 
 [% END %]

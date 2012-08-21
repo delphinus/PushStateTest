@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
     <title>[% title || 'PushStateTest' %]</title>
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta http-equiv="Content-Script-Type" content="text/javascript" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
     <meta name="format-detection" content="telephone=no" />
-        <script src="[% uri_for('/static/js/jquery-1.8.0.min.js') %]"></script>
+    <script src="[% uri_for('/static/js/jquery-1.8.0.min.js') %]"></script>
     <link href="[% uri_for('/static/bootstrap/bootstrap.css') %]" rel="stylesheet" type="text/css" />
     <script src="[% uri_for('/static/bootstrap/bootstrap-dropdown.js') %]"></script>
 
@@ -25,6 +25,7 @@
 
 
     <link href="[% static_file('/static/css/main.css') %]" rel="stylesheet" type="text/css" media="screen" />
+    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/themes/cupertino/jquery-ui.css" rel="stylesheet" type="text/css">
     <script src="[% static_file('/static/js/main.js') %]"></script>
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
