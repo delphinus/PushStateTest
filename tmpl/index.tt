@@ -7,16 +7,17 @@
 <li>戻る・進むボタンで行き来が出来ますが、pjax OFF のボタンを押すと、遷移が出来なくなります。
 </ul>
 
-<a rel="pjax" href="[% uri_for('/') %]">トップ</a>
+<div class="row">
+  <a rel="pjax" href="[% uri_for('/') %]">トップ</a>
 [% FOREACH region IN regions %]
-<a rel="pjax" href="[% uri_for('/', {'region' => region}) %]">[% region %]</a>
+  <a rel="pjax" href="[% uri_for('/', {'region' => region}) %]">[% region %]</a>
 [% END %][%# FOREACH %]
+</div>
 
-<form action="/" method="get">
-</form>
-
-<button id="pjaxOn">pjax ON</button>
-<button id="pjaxOff">pjax OFF</button>
+<div class="row">
+  <button id="pjaxOn">pjax ON</button>
+  <button id="pjaxOff">pjax OFF</button>
+</div>
 
 <div id="list">
 [% INCLUDE 'list.tt' %]

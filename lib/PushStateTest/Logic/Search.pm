@@ -54,6 +54,8 @@ sub search { my ($self, $p) = @_; #{{{
         push @{$data{list}}, $row;
     }
 
+    $data{no_rec} = 1 unless @{$data{list}};
+
     return \%data;
 } #}}}
 
