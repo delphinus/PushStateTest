@@ -22,7 +22,8 @@ use Log::Minimal;
 =cut
 sub index { my ($self, $p) = @_; #{{{
     my @regions = map {$_->[0]} @{$self->dbh->selectall_arrayref(<<SQL)};
-        SELECT region, COUNT(*) c FROM population GROUP BY region ORDER BY c
+        SELECT region, COUNT(*) c FROM population
+        GROUP BY region ORDER BY c DESC
 SQL
 
     return +{regions => \@regions};
