@@ -17,10 +17,24 @@ use Log::Minimal;
 
 =over 4
 
+=item * get_data()
+
+=cut
+sub get_data { my ($self, $is_pjax, $region) = @_; #{{{
+    my $data = $self->search($region);
+
+    if ($is_pjax) {
+        return $data;
+    } else {
+        my $index = $self->index;
+        return +{%$data, %$index};
+    }
+} #}}}
+
 =item * index()
 
 =cut
-sub index { my ($self, $p) = @_; #{{{
+sub index { my ($self) = @_; #{{{
     my @regions = map {$_->[0]} @{$self->dbh->selectall_arrayref(<<SQL)};
         SELECT region, COUNT(*) c FROM population
         GROUP BY region ORDER BY c DESC
@@ -32,13 +46,13 @@ SQL
 =item * search()
 
 =cut
-sub search { my ($self, $p) = @_; #{{{
+sub search { my ($self, $region) = @_; #{{{
     my %data;
 
     my %criteria;
-    if (defined $p->{region}) {
-        $criteria{region} = $p->{region};
-        $data{title} = "検索結果 - region => '$p->{region}'";
+    if (defined $region) {
+        $criteria{region} = $self->encoding->decode($region);
+        $data{title} = "検索結果 - region => '$criteria{region}'";
     }
 
     my ($stmt, @binds) = $self->sqla->select('population',

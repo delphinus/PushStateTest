@@ -1,4 +1,4 @@
-[% IF pjax %]
+[% IF is_pjax %]
 <title>[% title || 'PushStateTest' %]</title>
 [% END %][%# IF %]
 <table>

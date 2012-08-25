@@ -10,7 +10,7 @@ Logic Base Class
 =cut
 
 use common::sense;
-use parent qw!PushStateTest!;
+use parent qw!PushStateTest::Web!;
 
 =head2 METHODS
 

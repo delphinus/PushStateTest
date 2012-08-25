@@ -9,35 +9,34 @@ use PushStateTest::Logic::Search;
 use Log::Minimal;
 local $Log::Minimal::AUTODUMP = 1;
 
-any '/' => sub { my $c = shift; #{{{
-    my $p = $c->req->parameters;
+get '/' => sub { my ($c) = @_; #{{{
+    &_make_body($c);
+}; #}}}
+
+get '/:region' => sub { my ($c, $args) = @_; #{{{
+    &_make_body($c, $args->{region});
+}; #}}}
+
+sub _make_body { my ($c, $region) = @_; #{{{
     my $logic = PushStateTest::Logic::Search->new;
-    my $data = $logic->search($p);
+    my $is_pjax = $c->req->header('X-PJAX');
+    my $data = $logic->get_data($is_pjax, $region);
 
-    my %stash;
-
-    if ($c->req->header('X-PJAX')) {
-        %stash = (
-            %$data,
-            pjax => 1,
-        );
+    my %stash = %$data;
+    if ($is_pjax) {
+        $stash{pjax} = 1;
         $c->render('list.tt', \%stash);
 
     } else {
-        my $index = $logic->index($p);
-        %stash = (
-            %$data,
-            %$index,
-            css_files => [qw!
-                http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/themes/cupertino/jquery-ui.css
-            !],
-            js_files => [qw!
-                http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/jquery-ui.min.js
-                /static/js/jquery-pjax/jquery.pjax.js
-            !],
-        );
+        $stash{css_files} = [qw!
+            http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/themes/cupertino/jquery-ui.css
+        !];
+        $stash{js_files} = [qw!
+            http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.23/jquery-ui.min.js
+            /static/js/jquery-pjax/jquery.pjax.js
+        !];
         $c->render('index.tt', \%stash);
     }
-}; #}}}
+} #}}}
 
 1;
