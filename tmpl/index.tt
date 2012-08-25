@@ -8,14 +8,14 @@
 <li>表のデータは<a href="http://ja.wikipedia.org/wiki/%E4%B8%96%E7%95%8C%E3%81%AE%E9%83%BD%E5%B8%82%E5%9C%8F%E4%BA%BA%E5%8F%A3%E3%81%AE%E9%A0%86%E4%BD%8D" title="世界の都市圏人口の順位 - Wikipedia">ここ</a>からいただきました。
 </ul>
 
-<div class="row">
+<div>
   <a rel="pjax" href="[% uri_for('/') %]">トップ</a>
 [% FOREACH region IN regions %]
   <a rel="pjax" href="[% uri_for('/' _ url(region)) %]">[% region %]</a>
 [% END %][%# FOREACH %]
 </div>
 
-<div class="row">
+<div>
   <button id="pjaxOn">pjax ON</button>
   <button id="pjaxOff">pjax OFF</button>
 </div>
