@@ -2,7 +2,7 @@
 <title>[% title || 'PushStateTest' %]</title>
 [% END %][%# IF %]
 <table>
-  <caption>世界の首都圏人口</caption>
+  <caption>世界の都市圏人口</caption>
   <thead>
     <tr>
       [% FOREACH th IN ths %]

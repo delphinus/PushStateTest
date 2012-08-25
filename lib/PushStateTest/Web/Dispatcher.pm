@@ -1,6 +1,5 @@
 package PushStateTest::Web::Dispatcher;
-use strict;
-use warnings;
+use common::sense;
 use utf8;
 use Amon2::Web::Dispatcher::Lite;
 
@@ -9,18 +8,15 @@ use PushStateTest::Logic::Search;
 use Log::Minimal;
 local $Log::Minimal::AUTODUMP = 1;
 
-get '/' => sub { my ($c) = @_; #{{{
-    &_make_body($c);
-}; #}}}
+get '/' => sub { &_make_body(@_) };
 
-get '/:region' => sub { my ($c, $args) = @_; #{{{
-    &_make_body($c, $args->{region});
-}; #}}}
+get '/:region' => sub { &_make_body(@_) };
 
-sub _make_body { my ($c, $region) = @_; #{{{
+sub _make_body { my ($c, $args) = @_; #{{{
+    $args //= +{};
     my $logic = PushStateTest::Logic::Search->new;
     my $is_pjax = $c->req->header('X-PJAX');
-    my $data = $logic->get_data($is_pjax, $region);
+    my $data = $logic->get_data($is_pjax, $args->{region});
 
     my %stash = %$data;
     if ($is_pjax) {
