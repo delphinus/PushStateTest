@@ -11,16 +11,20 @@
     </tr>
   </thead>
   <tbody>
-    [% FOREACH tr IN list %]
+    [% IF no_rec %]
+    <tr><th colspan="[% ths.length %]">データがありません</th></tr>
+    [% ELSE %]
+      [% FOREACH tr IN list %]
     <tr>
-      [% FOREACH th IN ths %]
-        [% IF th == 'id' %]
+        [% FOREACH th IN ths %]
+          [% IF th == 'id' %]
       <th>[% tr.id %]</th>
-        [% ELSE %]
+          [% ELSE %]
       <td>[% tr.$th %]</td>
-        [% END %][%# IF %]
-      [% END %][%# FOREACH %]
+          [% END %][%# IF %]
+        [% END %][%# FOREACH %]
     </tr>
-    [% END %][%# FOREACH %]
+      [% END %][%# FOREACH %]
+    [% END %][%# IF %]
   </tbody>
 </table>

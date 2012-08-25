@@ -36,7 +36,8 @@ sub get_data { my ($self, $is_pjax, $region) = @_; #{{{
 =cut
 sub index { my ($self) = @_; #{{{
     my @regions = map {$_->[0]} @{$self->dbh->selectall_arrayref(<<SQL)};
-        SELECT region, COUNT(*) c FROM population GROUP BY region ORDER BY c
+        SELECT region, COUNT(*) c FROM population
+        GROUP BY region ORDER BY c DESC
 SQL
 
     return +{regions => \@regions};
@@ -66,6 +67,8 @@ sub search { my ($self, $region) = @_; #{{{
     while (my $row = $sth->fetchrow_hashref) {
         push @{$data{list}}, $row;
     }
+
+    $data{no_rec} = 1 unless @{$data{list}};
 
     return \%data;
 } #}}}

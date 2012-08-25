@@ -5,18 +5,32 @@ body {
 footer {
     text-align: right;
     padding-right: 10px;
-    padding-top: 2px; }
-    footer a {
-        text-decoration: none;
-        color: black;
-        font-weight: bold;
-    }
+    padding-top: 2px;
+}
+footer a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
 
 .dialog {
     display: none;
 }
 .shadow {
     box-shadow: 0 0 0 7px rgba(0,0,0,0.1);
+}
+
+table {
+    margin: 2em 0;
+}
+caption {
+    padding: 0.5em 0;
+    font-size: large;
+    font-weight: bold;
+}
+th, td {
+    border: 1px solid whitesmoke;
+    padding: 0.5em;
 }
 
 /* smart phones */
