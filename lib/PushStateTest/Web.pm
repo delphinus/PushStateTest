@@ -5,6 +5,8 @@ use utf8;
 use parent qw/PushStateTest Amon2::Web/;
 use File::Spec;
 
+use PushStateTest::Util;
+
 # dispatcher
 use PushStateTest::Web::Dispatcher;
 sub dispatch {
@@ -25,6 +27,7 @@ use Text::Xslate;
             c => sub { Amon2->context() },
             uri_with => sub { Amon2->context()->req->uri_with(@_) },
             uri_for  => sub { Amon2->context()->uri_for(@_) },
+            url => sub { PushStateTest::Util->new->url(@_) },
             static_file => do {
                 my %static_file_cache;
                 sub {

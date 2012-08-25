@@ -9,7 +9,7 @@
 
 <a rel="pjax" href="[% uri_for('/') %]">トップ</a>
 [% FOREACH region IN regions %]
-<a rel="pjax" href="[% uri_for('/', {'region' => region}) %]">[% region %]</a>
+<a rel="pjax" href="[% uri_for('/' _ url(region)) %]">[% region %]</a>
 [% END %][%# FOREACH %]
 
 <form action="/" method="get">

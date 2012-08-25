@@ -8,18 +8,24 @@ use PushStateTest::Logic::Search;
 
 use Log::Minimal;
 
-any '/' => sub { my $c = shift; #{{{
-    my $p = $c->req->parameters;
-    my $logic = PushStateTest::Logic::Search->new;
-    my $data = $logic->search($p);
-    local $Log::Minimal::AUTODUMP = 1;
-
-    if ($c->req->header('X-PJAX')) {
-        $c->render('list.tt', +{%$data, pjax => 1});
-    } else {
-        my $index = $logic->index($p);
-        $c->render('index.tt', +{%$data, %$index});
-    }
+get '/' => sub { my ($c) = @_; #{{{
+    &_make_body($c);
 }; #}}}
+
+get '/:region' => sub { my ($c, $args) = @_; #{{{
+    &_make_body($c, $args->{region});
+}; #}}}
+
+sub _make_body { my ($c, $region) = @_; #{{{
+    my $logic = PushStateTest::Logic::Search->new;
+    my $is_pjax = $c->req->header('X-PJAX');
+    my $data = $logic->get_data($is_pjax, $region);
+
+    if ($is_pjax) {
+        $c->render('list.tt', +{%$data, is_pjax => $is_pjax});
+    } else {
+        $c->render('index.tt', $data);
+    }
+} #}}}
 
 1;
