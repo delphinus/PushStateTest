@@ -2,9 +2,10 @@
 DIR=$(cd $(dirname $0);pwd)
 PID=$DIR/pids/app.pid
 PSGI=$DIR/app.psgi
-STARMAN=/Users/delphinus/perl5/perlbrew/perls/perl-5.14.1/bin/starman
+CARTON=/usr/local/opt/plenv/shims/carton
+STARMAN=./local/bin/starman
 
 cd $DIR
-$STARMAN -l 127.0.0.1:18521 --pid $PID $PSGI
+$CARTON exec -- $STARMAN -l 127.0.0.1:18521 --pid $PID $PSGI
 
 # vim:se ft=sh:
